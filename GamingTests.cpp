@@ -88,11 +88,14 @@ void test_piece_print(ErrorContext &ec, unsigned int numRuns) {
 
             std::stringstream ss;
             ss << s << ' ' << t << ' ' << f << ' ' << a;
-
+			//std::cout << s << ' ' << t << ' ' << f << ' ' << a;
             int id = 0;
             std::regex re("S[[:d:]]{1,}[ ]"); // ECMAScript, by default
             std::smatch m;
-            std::regex_search(ss.str(), m, re);
+
+			string fix = ss.str();
+
+            std::regex_search(fix, m, re);					//TODO: fix this (deleted function) : std::regex_search(ss.str(), m, re);
             if (m.size() != 1) { // parse problem
                 pass = false;
             } else {
@@ -685,6 +688,14 @@ void test_surroundings_smoketest(ErrorContext &ec) {
         for (int i = 0; i < 9; i++)
             ss0 << surr.array[i] << ' ';
 
+		//for (int i = 0; i < 9; i++)
+		//	std::cout << surr.array[i] << ' ';				//CHANGED:
+
+		//std::cout << std::endl;
+		//for (int i = 0; i < g.getWidth() * g.getHeight(); i++) {
+		//	std::cout << g;
+		//}
+
         pass = (ss0.str() == "4 4 4 4 5 6 4 1 6 ");
         if (! pass) std::cout << ss0.str() << std::endl;
 
@@ -966,15 +977,15 @@ void test_game_populate(ErrorContext &ec, unsigned int numRuns) {
             pass = pass && g.addFood(0, 2);
             pass = pass && g.addFood(2, 1);
             pass = pass && g.addAdvantage(2, 2);
-            pass = pass && g.addSimple(4, 3);
+            pass = pass && g.addSimple(4, 3);					// ERROR: OUT OF BOUNDS!!!
             pass = pass && g.addAdvantage(2, 3);
 
-            pass = pass && (! g.addFood(4, 3));
+            pass = pass && (! g.addFood(4, 3));				// ERROR: OUT OF BOUNDS
             pass = pass && (! g.addStrategic(0, 2));
 
             pass = pass &&
-                          (g.getNumPieces() == 7) &&
-                          (g.getNumAgents() == 3) &&
+                          (g.getNumPieces() == 7) &&			// g.getNumPieces() == 7
+                          (g.getNumAgents() == 3) &&			// g.getNumAgents() == 3
                           (g.getNumResources() == 4);
 
             ec.result(pass);
@@ -1062,7 +1073,7 @@ void test_game_print(ErrorContext &ec, unsigned int numRuns) {
 
         {
             Game g(3, 3, false);
-
+			
             std::stringstream ss;
             ss << g;
             std::string line;
@@ -1093,7 +1104,6 @@ void test_game_print(ErrorContext &ec, unsigned int numRuns) {
 
         {
             Game g(7, 6, false);
-
             std::stringstream ss;
             ss << g;
             std::string line;

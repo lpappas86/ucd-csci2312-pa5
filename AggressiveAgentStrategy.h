@@ -6,6 +6,7 @@
 #define PA5GAME_AGGRESSIVEAGENTSTRATEGY_H
 
 #include "Strategy.h"
+#include "Game.h"
 
 namespace Gaming {
 

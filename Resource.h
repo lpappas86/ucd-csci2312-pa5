@@ -18,7 +18,7 @@ namespace Gaming {
     public:
         static const double RESOURCE_SPOIL_FACTOR;
 
-        Resource(const Game &g, const Position &p, double __capacity);
+        Resource(const Game &g, const Position &p, double capacity);
         ~Resource();
 
         virtual double getCapacity() const { return __capacity; }
@@ -26,7 +26,7 @@ namespace Gaming {
 
         void age() override final;
 
-        bool isViable() const override final { return !isFinished() && __capacity > 0.0; }
+        bool isViable() const override final { return !isFinished() && __capacity > .0000001; }
 
         ActionType takeTurn(const Surroundings &s) const override;
 

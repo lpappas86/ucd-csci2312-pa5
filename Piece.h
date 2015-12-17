@@ -6,13 +6,13 @@
 #define PA5GAME_GAMEUNIT_H
 
 #include <string>
+#include<iomanip>
 
 #include "Game.h"
 
 namespace Gaming {
 
     class Resource;
-
     class Piece {
 
     private:
@@ -52,6 +52,7 @@ namespace Gaming {
         virtual Piece &interact(Agent *) = 0;
         virtual Piece &interact(Resource *) = 0;
 
+		friend bool operator<(const Piece &, const Piece &);
         friend std::ostream &operator<<(std::ostream &os, const Piece &piece);
     };
 }

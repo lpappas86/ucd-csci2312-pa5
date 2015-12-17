@@ -8,9 +8,14 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include<iomanip>
+#include<string>
+#include<set>
 
 #include "Gaming.h"
 #include "DefaultAgentStrategy.h"
+
+//TODO: Switch rows and collumns?????
 
 namespace Gaming {
 
@@ -25,7 +30,7 @@ namespace Gaming {
 
     private:
         static const unsigned int NUM_INIT_AGENT_FACTOR;
-        static const unsigned int NUM_INIT_RESOURCE_FACTOR;
+        static const unsigned int NUM_INIT_RESOURCE_FACTOR;					
 
         static PositionRandomizer __posRandomizer;
 
@@ -63,6 +68,7 @@ namespace Gaming {
         unsigned int getNumResources();
         Status getStatus() const { return __status; }
         unsigned int getRound() const { return __round; }
+		PieceType getPieceType(Piece *) const;
 
         // grid population methods
         bool addSimple(const Position &position);
@@ -74,6 +80,7 @@ namespace Gaming {
         bool addAdvantage(const Position &position);
         bool addAdvantage(unsigned x, unsigned y);
         const Surroundings getSurroundings(const Position &pos) const;
+		int pos2index(const Position &) const;	// converts position object to index for inserting into vector
 
         // gameplay methods
         static const ActionType reachSurroundings(const Position &from, const Position &to); // note: STAY by default
